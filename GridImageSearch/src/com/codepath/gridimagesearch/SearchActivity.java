@@ -19,6 +19,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.Toast;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -30,7 +31,7 @@ public class SearchActivity extends Activity {
 	ArrayList<ImageResult> imageResults = new ArrayList<ImageResult>();
 	ImageResultArrayAdapter imageAdapter;
 	ImageSearchFilters filters;
-	
+
 	public static final String FILTER_KEY = "filter";
 	private final int FILTER_REQUEST_CODE = 20;
 	
@@ -72,32 +73,22 @@ public class SearchActivity extends Activity {
 				startActivity(i);
 			}
 		});
-	}
-	
-	public void onImageSearch(View v) {
-		String query = etQuery.getText().toString();
 		
-		AsyncHttpClient client = new AsyncHttpClient();
-		client.get(getAPIRequest(query),
-				new JsonHttpResponseHandler() {
+		gvResults.setOnScrollListener(new EndlessScrollListener() {
+			
 			@Override
-			public void onSuccess(JSONObject response) {
-				JSONArray imageJsonResults = null;
-				try {
-					imageJsonResults = response.getJSONObject(
-							"responseData").getJSONArray("results");
-					imageResults.clear();
-					imageAdapter.addAll(ImageResult
-							.fromJSONArray(imageJsonResults));
-					Log.d("DEBUG", imageResults.toString());
-				} catch (JSONException e) {
-					e.printStackTrace();
-				}
+			public void onLoadMore(int page, int totalItemsCount) {
+				customLoadMoreDataFromApi(totalItemsCount);
 			}
 		});
 	}
 	
-	private String getAPIRequest(String query) {
+	public void onImageSearch(View v) {
+		imageResults.clear();
+		customLoadMoreDataFromApi(0);
+	}
+	
+	private String getAPIRequest(String query, int size) {
 		String api = "https://ajax.googleapis.com/ajax/services/search/images?rsz=8&" +
 				"start=" + 0 + "&v=1.0&q=" + Uri.encode(query);
 		if(filters.getSize() != null) {
@@ -112,9 +103,36 @@ public class SearchActivity extends Activity {
 		if(filters.getSite() != null) {
 			api+="&as_sitesearch="+filters.getSite();
 		}
+		api+="&start="+size;
 		
 		Log.d("DEBUG", "API Requests: " + api);
 		return api;
+	}
+	
+	public void customLoadMoreDataFromApi(int page) {
+		String query = etQuery.getText().toString();
+		
+		AsyncHttpClient client = new AsyncHttpClient();
+		client.get(getAPIRequest(query, page),
+				new JsonHttpResponseHandler() {
+			@Override
+			public void onSuccess(JSONObject response) {
+				JSONArray imageJsonResults = null;
+				try {
+					imageJsonResults = response.getJSONObject(
+							"responseData").getJSONArray("results");
+					
+					Log.d("cursor", "CURSOR = " + response.getJSONObject("responseData").
+							getJSONObject("cursor").toString());
+									
+					imageAdapter.addAll(ImageResult
+							.fromJSONArray(imageJsonResults));
+					Log.d("DEBUG", imageResults.toString());
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 	
 	public void onSettingsAction(MenuItem mi) {
