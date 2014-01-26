@@ -89,8 +89,8 @@ public class SearchActivity extends Activity {
 	}
 	
 	private String getAPIRequest(String query, int size) {
-		String api = "https://ajax.googleapis.com/ajax/services/search/images?rsz=8&" +
-				"start=" + 0 + "&v=1.0&q=" + Uri.encode(query);
+		String api = "https://ajax.googleapis.com/ajax/services/"
+				+ "search/images?rsz=8&v=1.0&q=" + Uri.encode(query);
 		if(filters.getSize() != null) {
 			api+="&imgsz="+filters.getSize();
 		}
@@ -105,7 +105,7 @@ public class SearchActivity extends Activity {
 		}
 		api+="&start="+size;
 		
-		Log.d("DEBUG", "API Requests: " + api);
+		Log.d("API", "API Requests: " + api);
 		return api;
 	}
 	
@@ -121,13 +121,12 @@ public class SearchActivity extends Activity {
 				try {
 					imageJsonResults = response.getJSONObject(
 							"responseData").getJSONArray("results");
-					
-					Log.d("cursor", "CURSOR = " + response.getJSONObject("responseData").
-							getJSONObject("cursor").toString());
 									
 					imageAdapter.addAll(ImageResult
 							.fromJSONArray(imageJsonResults));
 					Log.d("DEBUG", imageResults.toString());
+					Log.d("Response", response.getJSONObject(
+							"responseData").getJSONObject("cursor").toString());
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
