@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -29,11 +30,18 @@ public class SearchActivity extends Activity {
 	Button btnSearch;
 	ArrayList<ImageResult> imageResults = new ArrayList<ImageResult>();
 	ImageResultArrayAdapter imageAdapter;
+	ImageSearchFilters filters;
+	
+	public static final String FILTER_KEY = "filter";
+	private final int FILTER_REQUEST_CODE = 20;
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_search);
+		
+		filters = new ImageSearchFilters();
 		
 		setupViews();
 		setupListeners();
@@ -61,7 +69,7 @@ public class SearchActivity extends Activity {
 					View parent, int position, long arg3) {
 				Intent i = new Intent(getApplicationContext(), ImageDisplayActivity.class);
 				ImageResult imageResult = imageResults.get(position);
-				i.putExtra("url", imageResult.getFullUrl());
+				i.putExtra("result", imageResult);
 				startActivity(i);
 			}
 		});
@@ -91,5 +99,20 @@ public class SearchActivity extends Activity {
 				}
 			}
 		});
+	}
+	
+	public void onSettingsAction(MenuItem mi) {
+		Intent i = new Intent(getApplicationContext(),
+				ImageFilterActivity.class);
+		i.putExtra(FILTER_KEY, filters);
+		startActivityForResult(i, FILTER_REQUEST_CODE);
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if(resultCode == RESULT_OK && requestCode == FILTER_REQUEST_CODE) {
+			filters = (ImageSearchFilters) data.getSerializableExtra(
+					ImageFilterActivity.FILTER_KEY);
+		}
 	}
 }
