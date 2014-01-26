@@ -25,13 +25,16 @@ public class SearchActivity extends Activity {
 	GridView gvResults;
 	Button btnSearch;
 	ArrayList<ImageResult> imageResults = new ArrayList<ImageResult>();
+	ImageResultArrayAdapter imageAdapter;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_search);
 		
-		setupViews();		
+		setupViews();
+		imageAdapter = new ImageResultArrayAdapter(this, imageResults);
+		gvResults.setAdapter(imageAdapter);
 	}
 
 	@Override
@@ -40,8 +43,6 @@ public class SearchActivity extends Activity {
 		getMenuInflater().inflate(R.menu.search, menu);
 		return true;
 	}
-	
-	//stopped at 32
 
 	public void setupViews() {
 		etQuery = (EditText) findViewById(R.id.etQuery);
@@ -64,10 +65,10 @@ public class SearchActivity extends Activity {
 				try {
 					imageJsonResults = response.getJSONObject(
 							"responseData").getJSONArray("results");
-					imageResults.clear();
-					imageResults.addAll(ImageResult
+					//imageResults.clear();
+					imageAdapter.addAll(ImageResult
 							.fromJSONArray(imageJsonResults));
-					Log.d("DEBUG", imageResults.toString());
+					//Log.d("DEBUG", imageResults.toString());
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
