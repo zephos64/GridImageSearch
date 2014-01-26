@@ -18,6 +18,9 @@ public class ImageSearchFilters implements Serializable{
 	}
 	
 	public String getSize() {
+		if(curSize != null && curSize.equals("extra large")) {
+			return "xlarge";
+		}
 		return curSize;
 	}
 	
@@ -26,6 +29,11 @@ public class ImageSearchFilters implements Serializable{
 	}
 	
 	public String getType() {
+		if(curType != null && curType.equals("clip art")) {
+			return "clipart";
+		} else if(curType != null && curType.equals("line art")) {
+			return "lineart";
+		}
 		return curType;
 	}
 	

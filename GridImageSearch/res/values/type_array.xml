@@ -2,9 +2,9 @@
 <resources>
         <string-array name="type_array">
         <item></item>
-        <item>Faces</item>
-        <item>Photo</item>
-        <item>Clip Art</item>
-        <item>Line Art</item>
+        <item>face</item>
+        <item>photo</item>
+        <item>clip art</item>
+        <item>line art</item>
     </string-array>
 </resources>

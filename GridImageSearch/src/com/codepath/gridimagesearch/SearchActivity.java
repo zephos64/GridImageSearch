@@ -19,7 +19,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
-import android.widget.Toast;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -77,12 +76,9 @@ public class SearchActivity extends Activity {
 	
 	public void onImageSearch(View v) {
 		String query = etQuery.getText().toString();
-		Toast.makeText(this, "Searching for " + query, Toast.LENGTH_SHORT)
-			.show();
 		
 		AsyncHttpClient client = new AsyncHttpClient();
-		client.get("https://ajax.googleapis.com/ajax/services/search/images?rsz=8&" +
-				"start=" + 0 + "&v=1.0&q=" + Uri.encode(query),
+		client.get(getAPIRequest(query),
 				new JsonHttpResponseHandler() {
 			@Override
 			public void onSuccess(JSONObject response) {
@@ -99,6 +95,26 @@ public class SearchActivity extends Activity {
 				}
 			}
 		});
+	}
+	
+	private String getAPIRequest(String query) {
+		String api = "https://ajax.googleapis.com/ajax/services/search/images?rsz=8&" +
+				"start=" + 0 + "&v=1.0&q=" + Uri.encode(query);
+		if(filters.getSize() != null) {
+			api+="&imgsz="+filters.getSize();
+		}
+		if(filters.getColor() != null) {
+			api+="&imgcolor="+filters.getColor();	
+		}
+		if(filters.getType() != null) {
+			api+="&imgtype="+filters.getType();
+		}
+		if(filters.getSite() != null) {
+			api+="&as_sitesearch="+filters.getSite();
+		}
+		
+		Log.d("DEBUG", "API Requests: " + api);
+		return api;
 	}
 	
 	public void onSettingsAction(MenuItem mi) {
