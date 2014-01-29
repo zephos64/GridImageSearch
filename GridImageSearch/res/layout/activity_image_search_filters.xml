@@ -50,6 +50,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/spColor"
+        android:layout_alignParentRight="true"
         android:layout_below="@+id/tvFilterTitle"
         android:entries="@array/size_array" />
 
@@ -58,6 +59,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/spType"
+        android:layout_alignParentRight="true"
         android:layout_below="@+id/spSize"
         android:entries="@array/color_array" />
 
@@ -74,6 +76,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/etSiteFilter"
+        android:layout_alignParentRight="true"
         android:layout_below="@+id/spColor"
         android:entries="@array/type_array" />
 
