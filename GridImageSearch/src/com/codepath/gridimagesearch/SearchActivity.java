@@ -44,6 +44,7 @@ public class SearchActivity extends Activity {
 		
 		setupViews();
 		setupListeners();
+		setupScrollListeners();
 		imageAdapter = new ImageResultArrayAdapter(this, imageResults);
 		gvResults.setAdapter(imageAdapter);
 	}
@@ -72,9 +73,10 @@ public class SearchActivity extends Activity {
 				startActivity(i);
 			}
 		});
-		
+	}
+	
+	public void setupScrollListeners() {
 		gvResults.setOnScrollListener(new EndlessScrollListener() {
-			
 			@Override
 			public void onLoadMore(int page, int totalItemsCount) {
 				customLoadMoreDataFromApi(totalItemsCount);

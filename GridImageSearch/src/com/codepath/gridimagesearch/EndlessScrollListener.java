@@ -1,5 +1,6 @@
 package com.codepath.gridimagesearch;
 
+import android.util.Log;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 
@@ -15,6 +16,8 @@ public abstract class EndlessScrollListener implements OnScrollListener {
     private boolean loading = true;
     // Sets the starting page index
     private int startingPageIndex = 0;
+    // Max amount of elements that can be loaded
+    private int maxImg = 64;
 
     public EndlessScrollListener() {
     }
@@ -35,6 +38,9 @@ public abstract class EndlessScrollListener implements OnScrollListener {
     @Override
     public void onScroll(AbsListView view,int firstVisibleItem,int visibleItemCount,int totalItemCount) 
         {
+    	Log.d("scroll", loading + " " +firstVisibleItem +
+    			" " + visibleItemCount + " " + totalItemCount
+    			+ " " + previousTotalItemCount);
         // If the total item count is zero and the previous isn't, assume the
         // list is invalidated and should be reset back to initial state
         // If there are no items in the list, assume that initial items are loading
@@ -48,7 +54,13 @@ public abstract class EndlessScrollListener implements OnScrollListener {
         // changed, if so we conclude it has finished loading and update the current page
         // number and total item count.
         if (loading) {
-            if (totalItemCount > previousTotalItemCount) {
+            if ((totalItemCount > previousTotalItemCount) ||
+            		// for error case when hit max threshold for google api
+            		// then do new search (caused it to get permanently loading = true
+            		// didn't modify Search button because that sometimes causes
+            		// odd image loading when spamming the button
+            		(totalItemCount < previousTotalItemCount &&
+                    previousTotalItemCount == maxImg)) {
                 loading = false;
                 previousTotalItemCount = totalItemCount;
                 currentPage++;
