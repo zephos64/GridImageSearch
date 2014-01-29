@@ -32,11 +32,11 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_marginLeft="20dp"
-        android:layout_below="@+id/textView1"
+        android:layout_below="@+id/tvSizeTitle"
         android:entries="@array/size_array" />
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/tvSizeTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -46,15 +46,15 @@
         android:textStyle="bold" />
 
     <View
-        android:id="@+id/view1"
+        android:id="@+id/dividerTitle"
         android:layout_width="fill_parent"
         android:layout_height="1dp"
-        android:layout_alignLeft="@+id/textView1"
+        android:layout_alignLeft="@+id/tvSizeTitle"
         android:layout_below="@+id/tvFilterTitle"
         android:background="@android:color/darker_gray" />
 
     <View
-        android:id="@+id/View01"
+        android:id="@+id/dividerSize"
         android:layout_width="fill_parent"
         android:layout_height="1dp"
         android:layout_alignBottom="@+id/spSize"
@@ -68,11 +68,11 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/spSize"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/textView2"
+        android:layout_below="@+id/tvColorTitle"
         android:entries="@array/color_array" />
 
     <View
-        android:id="@+id/View02"
+        android:id="@+id/dividerColor"
         android:layout_width="fill_parent"
         android:layout_height="1dp"
         android:layout_alignBottom="@+id/spColor"
@@ -86,11 +86,11 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/spColor"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/textView3"
+        android:layout_below="@+id/tvTypeTitle"
         android:entries="@array/type_array" />
 
     <View
-        android:id="@+id/View03"
+        android:id="@+id/dividerType"
         android:layout_width="fill_parent"
         android:layout_height="1dp"
         android:layout_alignBottom="@+id/spType"
@@ -104,14 +104,14 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/textView4"
+        android:layout_below="@+id/tvSiteTitle"
         android:ems="10" >
 
         <requestFocus />
     </EditText>
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/tvSiteTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -121,22 +121,22 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/tvColorTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_marginTop="15dp"
         android:layout_below="@+id/spSize"
+        android:layout_marginTop="15dp"
         android:text="@string/text_color"
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/tvTypeTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_marginTop="15dp"
         android:layout_below="@+id/spColor"
+        android:layout_marginTop="15dp"
         android:text="@string/text_image_type"
         android:textStyle="bold" />
 
