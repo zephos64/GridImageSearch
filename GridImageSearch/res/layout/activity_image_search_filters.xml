@@ -8,93 +8,136 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".ImageFilterActivity" >
 
+    <Button
+        android:id="@+id/btnFilterSave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:onClick="onSave"
+        android:text="@string/btn_save" />
+
     <TextView
         android:id="@+id/tvFilterTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="17dp"
         android:text="@string/text_filter_title"
         android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView3"
-        android:layout_below="@+id/textView3"
-        android:layout_marginTop="25dp"
-        android:text="@string/text_site" />
-
-    <Button
-        android:id="@+id/btnFilterSave"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/etSiteFilter"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="77dp"
-        android:onClick="onSave"
-        android:text="@string/btn_save" />
-
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/spSize"
-        android:layout_alignLeft="@+id/tvFilterTitle"
-        android:text="@string/text_size" />
 
     <Spinner
         android:id="@+id/spSize"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/spColor"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/tvFilterTitle"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@+id/textView1"
         android:entries="@array/size_array" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/tvFilterTitle"
+        android:layout_marginTop="15dp"
+        android:text="@string/text_size"
+        android:textStyle="bold" />
+
+    <View
+        android:id="@+id/view1"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_below="@+id/tvFilterTitle"
+        android:background="@android:color/darker_gray" />
+
+    <View
+        android:id="@+id/View01"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_alignBottom="@+id/spSize"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:background="@android:color/darker_gray" />
 
     <Spinner
         android:id="@+id/spColor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/spType"
+        android:layout_alignLeft="@+id/spSize"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/spSize"
+        android:layout_below="@+id/textView2"
         android:entries="@array/color_array" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <View
+        android:id="@+id/View02"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
         android:layout_alignBottom="@+id/spColor"
-        android:layout_alignLeft="@+id/textView1"
-        android:text="@string/text_color" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:background="@android:color/darker_gray" />
 
     <Spinner
         android:id="@+id/spType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/etSiteFilter"
+        android:layout_alignLeft="@+id/spColor"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/spColor"
+        android:layout_below="@+id/textView3"
         android:entries="@array/type_array" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <View
+        android:id="@+id/View03"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
         android:layout_alignBottom="@+id/spType"
-        android:layout_alignLeft="@+id/textView2"
-        android:text="@string/text_image_type" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:background="@android:color/darker_gray" />
 
     <EditText
         android:id="@+id/etSiteFilter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textView4"
-        android:layout_alignBottom="@+id/textView4"
-        android:layout_alignLeft="@+id/btnFilterSave"
-        android:ems="10" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/textView4"
+        android:ems="10" >
+
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/spType"
+        android:layout_marginTop="15dp"
+        android:text="@string/text_site"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/spSize"
+        android:text="@string/text_color"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/spColor"
+        android:text="@string/text_image_type"
+        android:textStyle="bold" />
 
 </RelativeLayout>
