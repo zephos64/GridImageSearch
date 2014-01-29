@@ -105,7 +105,8 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/tvSiteTitle"
-        android:ems="10" >
+        android:ems="10"
+        android:hint="@string/siteHint" >
 
         <requestFocus />
     </EditText>
